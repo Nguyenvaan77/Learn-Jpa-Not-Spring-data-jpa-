@@ -1,0 +1,76 @@
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+
+    <persistence-unit name="com.anhangda37.basis-postgres-hibernate-PU" transaction-type="RESOURCE_LOCAL">
+        <!-- Chỉ định JPA provider là Hibernate -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Khai báo các entity class -->
+        <class>com.anhangda37.basis.entity.Animal</class>
+
+        <!-- Cấu hình kết nối CSDL PostgreSQL -->
+        <properties>
+            <!-- JDBC Driver cho PostgreSQL -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+
+            <!-- JDBC URL: dạng chuẩn cho PostgreSQL -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/contactNumber"/>
+
+            <!-- Thông tin đăng nhập -->
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+            <property name="jakarta.persistence.jdbc.password" value="160220057a"/>
+
+            <!-- Hibernate dialect cho PostgreSQL -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+
+            <!-- Tạo lại bảng mỗi lần chạy (phù hợp môi trường dev) -->
+            <!--
+            "none" : Không làm gì cả, không cập nhật, không xóa, không tạo bảng mới, ..
+            "validate" : Kiểm tra bảng trong cơ sở dữ liệu có khớp nối với dữ liệu Object không
+            "update" : Cập nhật Schema: Tạo/ Thêm bảng mới trong cơ sở dữ liệu: Không xóa dữ liệu/ Bản ghi
+            "create" : Xóa toàn bộ bảng trước khi khởi chạy ứng dụng rồi tạo bảng mới từ đầu.
+            "create-drop" : Tạo bảng mới hoàn toàn rồi xóa bảng khi dừng ứng dụng
+             -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+            <!-- Hiện SQL trong console -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="com.anhangda37.basis-postgres-eclipse-PU" transaction-type="RESOURCE_LOCAL">
+        <!-- Chỉ định JPA provider là Hibernate -->
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        <!-- Khai báo các entity class -->
+        <class>com.anhangda37.basis.entity.Animal</class>
+
+        <!-- Cấu hình kết nối CSDL PostgreSQL -->
+        <properties>
+            <!-- JDBC driver -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/zoo-manager-system"/>
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+            <property name="jakarta.persistence.jdbc.password" value="160220057a"/>
+
+            <!-- Thay thế Hibernate dialect bằng cấu hình EclipseLink -->
+            <!-- EclipseLink không dùng dialect như Hibernate -->
+
+            <!-- Tương đương với hibernate.hbm2ddl.auto -->
+            <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+            <!-- Có các giá trị: create-tables, drop-and-create-tables, none -->
+
+            <!-- Hiển thị SQL ra console -->
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true"/>
+
+            <!-- Tự động tạo DDL -->
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+        </properties>
+
+    </persistence-unit>
+
+</persistence>
