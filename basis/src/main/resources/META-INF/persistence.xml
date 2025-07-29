@@ -16,7 +16,7 @@
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
 
             <!-- JDBC URL: dạng chuẩn cho PostgreSQL -->
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/contactNumber"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/zoo-manager-system"/>
 
             <!-- Thông tin đăng nhập -->
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
@@ -71,6 +71,36 @@
             <property name="eclipselink.ddl-generation.output-mode" value="database"/>
         </properties>
 
+    </persistence-unit>
+
+    <persistence-unit name="com.anhangda37.basis-mysql-PU" transaction-type="RESOURCE_LOCAL">
+        <!-- JPA provider -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Khai báo entity class -->
+        <class>com.anhangda37.basis.entity.Animal</class>
+
+        <properties>
+            <!-- Driver MySQL -->
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+
+            <!-- JDBC URL (chỉnh dbname cho đúng) -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hocjpa"/>
+
+            <!-- Thông tin đăng nhập -->
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value="160220057a"/>
+
+            <!-- Dialect cho MySQL -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+
+            <!-- Tùy chọn Schema -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+
+            <!-- Debug SQL -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
     </persistence-unit>
 
 </persistence>

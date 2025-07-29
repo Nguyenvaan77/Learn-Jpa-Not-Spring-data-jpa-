@@ -1,6 +1,9 @@
 package com.anhangda37.basis.payload.request;
 
-public class ContactUpdateRequest {
+import lombok.Data;
+
+@Data
+public class ContactCreateRequest {
     private String name;
     private String phoneNumber;
 }
