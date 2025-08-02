@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Appender cho package cụ thể -->
+    <appender name="CONTROLLER_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file >logs/controller/controller-file-log.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Định dạng tên file theo ngày -->
+            <fileNamePattern>logs/controller-file-log-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender cho package cụ thể -->
+    <appender name="TRANSFER_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file >logs/transfer/transfer-file-log.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Định dạng tên file theo ngày -->
+            <fileNamePattern>logs/transfer/transfer-file-log-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender cho package cụ thể -->
+    <appender name="GLOBAL_EXCEPTION_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/exception/global-exception-file-log.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Định dạng tên file theo ngày -->
+            <fileNamePattern>logs/exception/global-exception-file-log-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender cho package cụ thể -->
+    <appender name="SERVICE_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/controller/service-file-log.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Định dạng tên file theo ngày -->
+            <fileNamePattern>logs/service-file-log-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <!-- Appender cho log mặc định (tất cả package khác) -->
+    <appender name="DEFAULT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/spring.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/spring-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Console Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logger cho package cụ thể -->
+    <logger name="com.anhangda37.basis.controller" level="INFO">
+        <appender-ref ref="CONTROLLER_FILE" />
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <logger name="com.anhangda37.basis.service.BankService" level="INFO">
+        <appender-ref ref="TRANSFER_FILE" />
+        <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <!-- Logger cho package cụ thể -->
+    <logger name="com.anhangda37.basis.service" level="INFO" additivity="false">
+        <appender-ref ref="SERVICE_FILE" />
+        <appender-ref ref="CONSOLE" /> <!-- Tùy chọn: Ghi cả vào console -->
+    </logger>
+
+    <!-- Logger cho package cụ thể -->
+    <logger name="com.anhangda37.basis.exception" level="INFO" additivity="false">
+        <appender-ref ref="GLOBAL_EXCEPTION_FILE" />
+    </logger>
+
+    <!-- Root logger cho các package khác -->
+    <root level="INFO">
+        <appender-ref ref="DEFAULT_FILE" />
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>
